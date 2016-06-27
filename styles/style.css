@@ -40,3 +40,8 @@ div#navBar {
 	padding: 3%;
 	margin: 3%;
 }
+img {
+    display: block;
+    height: 300px;
+    margin: auto;
+}
