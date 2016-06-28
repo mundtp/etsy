@@ -6,7 +6,7 @@ var qs = function(input) {
 }
 
 var ListingsCollection = Backbone.Collection.extend({
-	url: 'https://openapi.etsy.com/v2/listings/active.json',
+	url: 'https://openapi.etsy.com/v2/listings/active.js',
 	_key: 'aavnvygu0h5r52qes74x9zvo',
 	parse: function(rawJSON) {
 	
@@ -39,7 +39,9 @@ var ListingsView = Backbone.View.extend({
 		for (var i = 0; i < docsArray.length; i ++) {
 			var articleMod = docsArray[i]
 			htmlString += '<div data-id="' + articleMod.get('listing_id') + '" class="snippet">' 
-			htmlString += articleMod.get('title')
+			htmlString += articleMod.get('title').substr(0,35)
+			htmlString += '<img class="collectionImg" src="'+ articleMod.get('Images')[0].url_fullxfull +' ">'
+			htmlString += '<p>Price: $' + articleMod.get('price') + '</p>'
 			htmlString += '</div>'
 		}
 		this.el.innerHTML = htmlString
@@ -81,11 +83,12 @@ var ListingsRouter = Backbone.Router.extend({
 	
 		var searchCollection = new ListingsCollection()
 		searchCollection.fetch({
+			dataType: 'jsonp',
 			data: {
 				api_key: searchCollection._key,
 				tags: searchTerm,
-				dataType: 'jsonp',
 				processData: true,
+				includes: "Images,Shop",
 			}
 		})
 		new ListingsView(searchCollection)
@@ -93,7 +96,7 @@ var ListingsRouter = Backbone.Router.extend({
 
 	doDetailView: function(id) {
 		var ListingsModel = Backbone.Model.extend({
-			url: 'https://openapi.etsy.com/v2/listings/' + id + '.json',
+			url: 'https://openapi.etsy.com/v2/listings/' + id + '.js',
 			_key: 'aavnvygu0h5r52qes74x9zvo',
 				parse: function(rawJSON) {
 				return rawJSON.results[0]
@@ -102,10 +105,10 @@ var ListingsRouter = Backbone.Router.extend({
 
 		var listingsModel = new ListingsModel
 		listingsModel.fetch({
+			dataType: 'jsonp',
 			data: {
 				includes: "Images,Shop",
 				api_key: listingsModel._key,
-				dataType: 'jsonp',
 				processData: true,
 			}
 		})
@@ -120,10 +123,11 @@ var ListingsRouter = Backbone.Router.extend({
 		var homeCollection = new ListingsCollection()
 
 		homeCollection.fetch({
+			dataType: 'jsonp',
 			data: {
-				api_key: homeCollection._key,
-				dataType: 'jsonp',
+				api_key: homeCollection._key,				
 				processData: true,
+				includes: "Images,Shop",
 			}
 		})
 		

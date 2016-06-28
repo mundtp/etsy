@@ -4,11 +4,12 @@
 }
 
 input[type="text"] {
-    padding: 2%;
-    border: 2px solid tomato;
+    padding: 1%;
+    border: 2px solid black;
     background: #666;
     transition: .5s all ease;
     font-size: 24px;
+    margin-top: 6px
 }
 
 input[type="text"]:focus {
@@ -17,17 +18,23 @@ input[type="text"]:focus {
     background: white;
 }
 
-a {
-    text-decoration: none;
-    background: #222;
+a {text-decoration: none;
+    background:;
     color: white;
-    padding: 1%;
-    margin: 0 2%;
+    padding: .5%;
+    margin: 2%;
+    padding-bottom: 40px;
+    
 }
 
 div#navBar {
     text-align: center;
     margin: 5%;
+    text-decoration: none;
+    background: #66b3ff;
+    color: white;
+    padding: 1%;
+    margin: 0.2%;
 }
 
 #container {
@@ -36,12 +43,22 @@ div#navBar {
 
 .snippet {
 	font-size: 24px;
-	border: 2px solid tomato;
+	border: 2px solid #66b3ff;
 	padding: 3%;
 	margin: 3%;
+    display: inline-block;
+    width: 21%;
+    height: 60vh;
+    vertical-align: top
 }
 img {
     display: block;
     height: 300px;
+    margin: auto;
+}
+
+img.collectionImg {
+    height: 150px;
+    width: 150px;
     margin: auto;
 }
